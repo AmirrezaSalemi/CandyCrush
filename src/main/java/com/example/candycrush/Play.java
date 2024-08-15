@@ -1,6 +1,5 @@
 package com.example.candycrush;
 
-import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
@@ -8,7 +7,6 @@ import javafx.scene.effect.Glow;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import javax.sound.sampled.*;
 import java.io.File;
@@ -50,8 +48,6 @@ public class Play {
                         selectedCandy.setEffect(null);
                         selectedCandy = null;
                     } else if ((Math.abs(x1 - x2) == 75 && y1 - y2 == 0) || (Math.abs(y1 - y2) == 75 && x1 - x2 == 0)) {
-                        TranslateTransition transition1 = new TranslateTransition(Duration.seconds(1), selectedCandy);
-                        TranslateTransition transition2 = new TranslateTransition(Duration.seconds(1), targetCandy);
                         selectedCandy.setLayoutX(x2);
                         selectedCandy.setLayoutY(y2);
                         targetCandy.setLayoutX(x1);
