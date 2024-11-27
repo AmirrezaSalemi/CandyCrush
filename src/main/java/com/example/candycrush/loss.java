@@ -21,8 +21,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-import static com.example.candycrush.GameArena.health;
-import static com.example.candycrush.GameArena.score;
+import static com.example.candycrush.GameArena.*;
 import static com.example.candycrush.Login.player;
 import static com.example.candycrush.Login_Signin.scores;
 import static com.example.candycrush.MainMenu.clip;
@@ -111,6 +110,8 @@ public class loss extends Application {
         playagaintext.setOnMouseClicked(mouseEvent -> {
             health = 3;
             score = 0;
+            time = 300;
+            timer = true;
             new GameArena().start(stage);
         });
         playagaintext.setOnMouseExited(mouseEvent -> {
@@ -124,6 +125,8 @@ public class loss extends Application {
         playagain.setOnMouseClicked(mouseEvent -> {
             health = 3;
             score = 0;
+            time = 300;
+            timer = true;
             new GameArena().start(stage);
         });
         playagain.setOnMouseExited(mouseEvent -> {

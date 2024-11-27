@@ -1,5 +1,6 @@
 package com.example.candycrush;
 
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
@@ -79,6 +80,7 @@ public class Play {
                             healthCheck = false;
                         }
                         if (health == 0){
+                            timeline.stop();
                             new loss().start(stage);
                         }
                         possibleTurn = false;
@@ -334,5 +336,20 @@ public class Play {
                 }
             }
         }
+    }
+    public void updateTimer(Stage stage) {
+        if (time > 0) {
+            time--;
+            timeText.setText(formatTime(time));
+        } else {
+            timeline.stop();
+            new loss().start(stage);
+        }
+    }
+
+    public String formatTime(int seconds) {
+        int minutes = seconds / 60;
+        int remainingSeconds = seconds % 60;
+        return String.format("%02d:%02d", minutes, remainingSeconds);
     }
 }

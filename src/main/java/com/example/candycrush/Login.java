@@ -1,5 +1,6 @@
 package com.example.candycrush;
 
+import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -20,11 +21,10 @@ import javax.sound.sampled.Clip;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static com.example.candycrush.GameArena.*;
 import static com.example.candycrush.Login_Signin.userpassword;
 import static com.example.candycrush.MainMenu.clip;
 import static com.example.candycrush.MainMenu.path;
-import static com.example.candycrush.GameArena.health;
-import static com.example.candycrush.GameArena.score;
 
 public class Login extends Application {
     public static String player = null;
@@ -169,6 +169,8 @@ public class Login extends Application {
             if (userTextField.getText().length() > 0 && passwordField.getText().length() > 0 && userpassword.containsKey(userTextField.getText()) && userpassword.get(userTextField.getText()).equals(passwordField.getText())){
                 clip.stop();
                 score = 0;
+                time = 300;
+                timer = true;
                 health = 3;
                 player = userTextField.getText();
                 new GameArena().start(stage);

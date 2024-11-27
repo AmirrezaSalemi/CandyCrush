@@ -1,5 +1,7 @@
 package com.example.candycrush;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -12,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import javax.sound.sampled.*;
 import java.io.BufferedReader;
@@ -27,7 +30,11 @@ public class GameArena extends Application {
     public static ImageView[] hearts = {new ImageView(full), new ImageView(full), new ImageView(full)};
     public static int health = 3;
     public static Text scoreText;
+    public static Text timeText;
+    public static Timeline timeline;
     public static int score = 0;
+    public static int time = 300;
+    public static boolean timer = true;
 
     @Override
     public void start(Stage stage) {
@@ -76,6 +83,7 @@ public class GameArena extends Application {
                 clip.start();
                 clip.loop(Clip.LOOP_CONTINUOUSLY);
             }
+            timeline.stop();
             new MainMenu().start(stage);
 
         });
@@ -102,6 +110,16 @@ public class GameArena extends Application {
         Play play = new Play(group, stage);
         play.rowcheck();
         play.columncheck();
+        if (timer) {
+            timer = false;
+            timeline = new Timeline(new KeyFrame(
+                    Duration.seconds(1),
+                    event -> play.updateTimer(stage)
+            ));
+            timeline.setCycleCount(time + 1);
+            timeline.play();
+        }
+
         Rectangle rectangle= new Rectangle();
         rectangle.setLayoutY(250);
         rectangle.setLayoutX(550);
@@ -110,6 +128,14 @@ public class GameArena extends Application {
         rectangle.setStroke(Color.DARKGRAY);
         rectangle.setStrokeWidth(2.5);
         rectangle.setFill(Color.GRAY);
+        Rectangle rect = new Rectangle();
+        rect.setLayoutY(310);
+        rect.setLayoutX(550);
+        rect.setWidth(175);
+        rect.setHeight(50);
+        rect.setStroke(Color.DARKGRAY);
+        rect.setStrokeWidth(2.5);
+        rect.setFill(Color.GRAY);
 
         scoreText = new Text();
         scoreText.setText(String.valueOf(score));
@@ -119,7 +145,15 @@ public class GameArena extends Application {
         scoreText.setFill(Color.WHITE);
         scoreText.setFont(Font.font("Harrington", 38));
 
-        group.getChildren().addAll(rectangle, scoreText);
+        timeText = new Text();
+        timeText.setText(String.valueOf(play.formatTime(time)));
+        timeText.setEffect(bright);
+        timeText.setLayoutY(345);
+        timeText.setLayoutX(560);
+        timeText.setFill(Color.WHITE);
+        timeText.setFont(Font.font("Harrington", 38));
+
+        group.getChildren().addAll(rectangle, rect, scoreText, timeText);
         stage.show();
     }
 
