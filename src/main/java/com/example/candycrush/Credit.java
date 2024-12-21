@@ -98,12 +98,12 @@ public class Credit extends Application {
 
 
         // Create a rectangle
-        Rectangle rectangle = new Rectangle(280, 120);
+        Rectangle rectangle = new Rectangle(320, 120);
         rectangle.setFill(Color.WHITESMOKE);
         rectangle.setStroke(Color.LIGHTPINK);
 
         // Create a text
-        Text text = new Text("Created with love by Amirreza Salemi \nthanks for spend your time with us💕.");
+        Text text = new Text("Created with love by Amirreza Salemi \nthanks for spend your time with us💕\n©shout out to SAGA team for their real \n\t\tCandy Crush Game.©");
         text.setFont(Font.font("harrington", 16));
 
         // Create a StackPane and add rectangle and text to it
